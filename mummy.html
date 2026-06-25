@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mummy Dhundo Yojana | मम्मी ढूंढो योजना</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0a0a0f;
+    color: #f0f0f0;
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .hero {
+    position: relative;
+    text-align: center;
+    padding: 60px 20px 40px;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(255,60,80,0.15) 0%, transparent 70%);
+    pointer-events: none;
+    animation: pulse-bg 4s ease-in-out infinite;
+  }
+
+  @keyframes pulse-bg {
+    0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
+    50% { opacity: 1; transform: translateX(-50%) scale(1.1); }
+  }
+
+  .badge {
+    display: inline-block;
+    background: rgba(255,60,80,0.15);
+    border: 1px solid rgba(255,60,80,0.4);
+    color: #ff3c50;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+    animation: fadeDown 0.6s ease both;
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(52px, 10vw, 100px);
+    line-height: 0.9;
+    letter-spacing: 2px;
+    color: #ffffff;
+    animation: fadeDown 0.7s ease both;
+    animation-delay: 0.1s;
+  }
+
+  .hero-title span {
+    color: #ff3c50;
+    display: block;
+  }
+
+  .hero-sub {
+    margin-top: 20px;
+    font-size: 15px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.5px;
+    animation: fadeDown 0.8s ease both;
+    animation-delay: 0.2s;
+  }
+
+  .siren {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 28px 0;
+    animation: fadeDown 0.9s ease both;
+    animation-delay: 0.3s;
+  }
+
+  .siren-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+  }
+  .siren-dot.red {
+    background: #ff3c50;
+    box-shadow: 0 0 12px #ff3c50;
+    animation: blink-red 1s ease-in-out infinite;
+  }
+  .siren-dot.blue {
+    background: #3c8eff;
+    box-shadow: 0 0 12px #3c8eff;
+    animation: blink-blue 1s ease-in-out infinite;
+  }
+  @keyframes blink-red {
+    0%, 100% { opacity: 1; } 50% { opacity: 0.1; }
+  }
+  @keyframes blink-blue {
+    0%, 100% { opacity: 0.1; } 50% { opacity: 1; }
+  }
+
+  .steps-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0;
+    max-width: 900px;
+    margin: 0 auto 60px;
+    padding: 0 20px;
+  }
+
+  .step-card {
+    position: relative;
+    padding: 40px 28px 36px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    border-left: 1px solid rgba(255,255,255,0.06);
+    text-align: center;
+    cursor: pointer;
+    overflow: hidden;
+    transition: background 0.3s;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: slideUp 0.6s ease forwards;
+  }
+
+  .step-card:nth-child(1) { animation-delay: 0.3s; }
+  .step-card:nth-child(2) { animation-delay: 0.45s; }
+  .step-card:nth-child(3) { animation-delay: 0.6s; }
+  .step-card:nth-child(4) { animation-delay: 0.75s; }
+
+  .step-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 60, 80, 0);
+    transition: background 0.3s;
+  }
+
+  .step-card:hover::before { background: rgba(255, 60, 80, 0.05); }
+  .step-card:hover .step-icon-wrap { transform: scale(1.1); }
+
+  .step-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: rgba(255,60,80,0.6);
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .step-icon-wrap {
+    width: 72px; height: 72px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: transform 0.3s;
+  }
+
+  .step-icon-wrap svg {
+    width: 36px; height: 36px;
+  }
+
+  .step-card:nth-child(1) .step-icon-wrap { background: rgba(255,60,80,0.12); }
+  .step-card:nth-child(2) .step-icon-wrap { background: rgba(60,142,255,0.12); }
+  .step-card:nth-child(3) .step-icon-wrap { background: rgba(255,180,0,0.12); }
+  .step-card:nth-child(4) .step-icon-wrap { background: rgba(80,255,140,0.12); }
+
+  .step-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 1px;
+    color: #fff;
+    margin-bottom: 10px;
+    line-height: 1.1;
+  }
+
+  .step-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.35);
+    line-height: 1.6;
+  }
+
+  .pulse-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    animation: ring-pulse 2s ease-out infinite;
+    opacity: 0;
+  }
+
+  .step-card:nth-child(1) .pulse-ring { border: 1px solid rgba(255,60,80,0.5); }
+  .step-card:nth-child(2) .pulse-ring { border: 1px solid rgba(60,142,255,0.5); animation-delay: 0.5s; }
+  .step-card:nth-child(3) .pulse-ring { border: 1px solid rgba(255,180,0,0.5); animation-delay: 1s; }
+  .step-card:nth-child(4) .pulse-ring { border: 1px solid rgba(80,255,140,0.5); animation-delay: 1.5s; }
+
+  @keyframes ring-pulse {
+    0% { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(2.2); opacity: 0; }
+  }
+
+  .bottom-cta {
+    text-align: center;
+    padding: 40px 20px 60px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .cta-label {
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+    margin-bottom: 16px;
+  }
+
+  .cta-main {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(28px, 5vw, 48px);
+    color: #fff;
+    letter-spacing: 2px;
+    line-height: 1;
+  }
+
+  .cta-main em {
+    color: #ff3c50;
+    font-style: normal;
+  }
+
+  .scan-line {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255,60,80,0.6), transparent);
+    animation: scan 4s linear infinite;
+    pointer-events: none;
+    z-index: 100;
+  }
+
+  @keyframes scan {
+    0% { top: 0; opacity: 1; }
+    90% { opacity: 1; }
+    100% { top: 100vh; opacity: 0; }
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slideUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .grid-line {
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .content { position: relative; z-index: 1; }
+</style>
+</head>
+<body>
+
+<div class="grid-line"></div>
+<div class="scan-line"></div>
+
+<div class="content">
+
+  <div class="hero">
+    <div class="badge">🚨 Sarkari Yojana &bull; सरकारी योजना</div>
+    <h1 class="hero-title">
+      Mummy
+      <span>Dhundo</span>
+      Yojana
+    </h1>
+    <p class="hero-sub">मम्मी ढूंढो योजना — India's Most Urgent Missing Mummy Recovery Program</p>
+    <div class="siren">
+      <div class="siren-dot red"></div>
+      <div class="siren-dot blue"></div>
+      <div class="siren-dot red"></div>
+      <div class="siren-dot blue"></div>
+      <div class="siren-dot red"></div>
+    </div>
+  </div>
+
+  <div class="steps-container">
+
+    <div class="step-card">
+      <span class="step-num">STEP 01</span>
+      <div class="step-icon-wrap">
+        <div class="pulse-ring"></div>
+        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="6" width="24" height="24" rx="4" fill="rgba(255,60,80,0.2)" stroke="#ff3c50" stroke-width="1.5"/>
+          <path d="M13 12h10M13 17h7M13 22h5" stroke="#ff3c50" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="26" cy="26" r="6" fill="#0a0a0f" stroke="#ff3c50" stroke-width="1.5"/>
+          <path d="M24 26l1.5 1.5L28 24" stroke="#ff3c50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="step-title">Hum Police Ko Call Karenge</div>
+      <div class="step-desc">SOS signal bhejo. Police helpline 100 pe call karo. Mummy ka description batao. Zara zyada details do.</div>
+    </div>
+
+    <div class="step-card">
+      <span class="step-num">STEP 02</span>
+      <div class="step-icon-wrap">
+        <div class="pulse-ring"></div>
+        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 26 C8 18 14 12 18 8 C22 12 28 18 28 26" stroke="#3c8eff" stroke-width="1.5" fill="rgba(60,142,255,0.1)"/>
+          <circle cx="18" cy="18" r="4" fill="rgba(60,142,255,0.3)" stroke="#3c8eff" stroke-width="1.5"/>
+          <path d="M10 30 h16" stroke="#3c8eff" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M18 8 v-4M14 9 l-2-3M22 9 l2-3" stroke="#3c8eff" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+        </svg>
+      </div>
+      <div class="step-title">Police Aayegi</div>
+      <div class="step-desc">Trained officers sadak pe niklenge. Sirens on, full speed. Mummy ki talash mein koi kami nahi.</div>
+    </div>
+
+    <div class="step-card">
+      <span class="step-num">STEP 03</span>
+      <div class="step-icon-wrap">
+        <div class="pulse-ring"></div>
+        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="18" cy="14" r="5" stroke="#ffb400" stroke-width="1.5" fill="rgba(255,180,0,0.1)"/>
+          <path d="M22 19 L29 26" stroke="#ffb400" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="18" cy="14" r="2" fill="#ffb400" opacity="0.5"/>
+          <path d="M8 28 C8 23 12 20 18 20" stroke="#ffb400" stroke-width="1.5" stroke-linecap="round" fill="none" stroke-dasharray="2 2"/>
+          <path d="M10 10 l-2-2M26 10 l2-2M10 18 l-2 2" stroke="#ffb400" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+        </svg>
+      </div>
+      <div class="step-title">Police Investigate Karegi</div>
+      <div class="step-desc">Clues collect honge. CCTV footage dekhi jayegi. Padosi se poochha jayega. Mummy ka pata lagaya jayega.</div>
+    </div>
+
+    <div class="step-card">
+      <span class="step-num">STEP 04</span>
+      <div class="step-icon-wrap">
+        <div class="pulse-ring"></div>
+        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="18" cy="13" r="5" stroke="#50ff8c" stroke-width="1.5" fill="rgba(80,255,140,0.1)"/>
+          <path d="M10 28 C10 23 13.6 20 18 20 C22.4 20 26 23 26 28" stroke="#50ff8c" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <path d="M13 26 l2 2 4-4" stroke="#50ff8c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M24 6 l2 2-4 4" stroke="#50ff8c" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+        </svg>
+      </div>
+      <div class="step-title">Mummy Wapas Aayengi!</div>
+      <div class="step-desc">Mission accomplished! Mummy safe &amp; sound ghar wapas. Celebration time! Chai ready rakho.</div>
+    </div>
+
+  </div>
+
+  <div class="bottom-cta">
+    <p class="cta-label">Guaranteed Result</p>
+    <div class="cta-main">
+      Mummy Milegi,<br><em>Pakka!</em>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
